@@ -17,7 +17,10 @@ def save_history(image_name, detections):
         df.to_csv(HISTORY_FILE, index=False)
 
 def load_history():
-    if os.path.exists(HISTORY_FILE):
-        return pd.read_csv(HISTORY_FILE)
+    if not os.path.exists(HISTORY_FILE) or os.path.getsize(HISTORY_FILE) == 0:
+        # Tạo file trống với các cột cần thiết
+        df = pd.DataFrame(columns=["filename", "prediction", "datetime"])
+        df.to_csv(HISTORY_FILE, index=False)
+        return df
     else:
-        return pd.DataFrame(columns=["timestamp", "image", "detections"])
+        return pd.read_csv(HISTORY_FILE)

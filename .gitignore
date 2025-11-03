@@ -19,7 +19,7 @@ ENV/
 # Cache and data
 data/uploads/*
 !data/history.csv
-
+history.csv
 # Model weights
 models/*.pt
 
