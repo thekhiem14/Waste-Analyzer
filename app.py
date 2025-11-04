@@ -1,3 +1,47 @@
+# Thêm mapping ở đầu file app.py
+label_map = {
+    '铝箔': 'Aluminum Foil',
+    '瓶盖': 'Bottle Cap',
+    '瓶子': 'Bottle',
+    '碎玻璃': 'Broken Glass',
+    '罐头': 'Can',
+    '纸箱': 'Cardboard',
+    '香烟': 'Cigarette',
+    '杯子': 'Cup',
+    '盖子': 'Lid',
+    '其他垃圾': 'Other Trash',
+    '其他塑料': 'Other Plastic',
+    '纸张': 'Paper',
+    '塑料袋包装纸': 'Plastic Bag / Wrapper',
+    '塑性容器': 'Plastic Container',
+    'Pop标签': 'Pop Label',
+    '吸管': 'Straw',
+    '泡沫塑料片': 'Foam Sheet',
+    '无标号垃圾': 'Unlabeled Trash'
+}
+# mapping từ index (0..17) sang tên tiếng Anh
+class_map = {
+    0: 'Aluminum foil',
+    1: 'Bottle cap',
+    2: 'Bottle',
+    3: 'Broken glass',
+    4: 'Can',
+    5: 'Cardboard',
+    6: 'Cigarette',
+    7: 'Cup',
+    8: 'Lid',
+    9: 'Other waste',
+    10: 'Other plastic',
+    11: 'Paper',
+    12: 'Plastic bag/wrapping',
+    13: 'Plastic container',
+    14: 'Pop label',
+    15: 'Straw',
+    16: 'Foam sheet',
+    17: 'Unlabeled waste'
+}
+
+
 # app.py
 import streamlit as st
 from PIL import Image
@@ -42,7 +86,8 @@ if uploaded is not None:
         st.subheader("Kết quả phát hiện")
         if len(detections) > 0:
             for d in detections:
-                st.markdown(f"**{d['label']}** — `{d['confidence']*100:.1f}%`")
+                eng_label = label_map.get(d['label'], d['label'])  # chuyển sang tiếng Anh
+                st.markdown(f"**{eng_label}** — `{d['confidence']*100:.1f}%`")
                 st.info(d["guide"])
         else:
             st.warning("Không phát hiện được đối tượng nào.")
