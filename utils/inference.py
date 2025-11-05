@@ -10,7 +10,6 @@ print(f"[INFO] Loading YOLO model from: {MODEL_PATH}")
 model = YOLO(MODEL_PATH)
 print("[INFO] Model loaded.")
 
-# Bảng gợi ý xử lý (bạn có thể mở rộng)
 RECYCLING_GUIDE = {
     "plastic": "♻️ Tái chế hoặc thu gom nhựa đúng nơi quy định",
     "bottle": "♻️ Vật liệu nhựa - rửa sạch trước khi tái chế",
@@ -46,7 +45,6 @@ def analyze_image(pil_image: Image.Image, conf_threshold: float = 0.25):
     Ghi chú: đồng thời in log ra console.
     """
     # chạy dự đoán (ultralytics YOLO)
-    # bạn có thể thêm imgsz=640, device="cpu"/"0" nếu cần
     results = model.predict(source=pil_image, conf=conf_threshold, verbose=False)
     result = results[0]
 
